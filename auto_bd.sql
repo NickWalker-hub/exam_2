@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Май 24 2024 г., 19:13
--- Версия сервера: 8.0.30
--- Версия PHP: 8.1.9
+-- Хост: 127.0.0.1
+-- Время создания: Май 24 2024 г., 19:43
+-- Версия сервера: 10.4.32-MariaDB
+-- Версия PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `car` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -47,11 +47,11 @@ INSERT INTO `car` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `request` (
-  `id` int NOT NULL,
-  `id_user` int NOT NULL,
-  `id_car` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_car` int(11) NOT NULL,
   `backing_date` date NOT NULL,
-  `id_status` int NOT NULL DEFAULT '1'
+  `id_status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -60,7 +60,8 @@ CREATE TABLE `request` (
 
 INSERT INTO `request` (`id`, `id_user`, `id_car`, `backing_date`, `id_status`) VALUES
 (2, 5, 2, '2024-05-24', 2),
-(3, 5, 2, '2024-05-24', 1);
+(3, 5, 2, '2024-05-24', 1),
+(4, 5, 1, '2024-05-28', 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ INSERT INTO `request` (`id`, `id_user`, `id_car`, `backing_date`, `id_status`) V
 --
 
 CREATE TABLE `role` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -88,7 +89,7 @@ INSERT INTO `role` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `status` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -108,13 +109,13 @@ INSERT INTO `status` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `fio` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `id_role` int NOT NULL DEFAULT '1',
+  `id_role` int(11) NOT NULL DEFAULT 1,
   `driver` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -123,8 +124,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `fio`, `phone`, `email`, `login`, `password`, `id_role`, `driver`) VALUES
-(5, 'Петров Александр Александрович', '+7 (999) 999-99-99', 's@mail.ru', 'user4', '25d55ad283aa400af464c76d713c07ad', 1, '00 00 000000'),
-(6, 'Админ', '+7 (999) 999-99-99', 's@mail.ru', 'car', '498927815ebcfa8a97dc2b004b5a7a69', 2, '00 00 000000');
+(5, 'Лепестков Святослав Игоревич', '+7 (999) 999-99-99', 'user@mail.ru', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 1, '12 56 836548'),
+(6, 'Admin', '+7 (999) 999-99-99', 'admin@mail.ru', 'car', '498927815ebcfa8a97dc2b004b5a7a69', 2, '24 84 581348');
 
 --
 -- Индексы сохранённых таблиц
@@ -173,31 +174,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `car`
 --
 ALTER TABLE `car`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `request`
 --
 ALTER TABLE `request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
